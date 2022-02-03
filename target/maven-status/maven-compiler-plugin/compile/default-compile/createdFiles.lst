@@ -1,1 +1,7 @@
-br\edu\ifsul\cc\lpoo\clinica\szmain.class
+br\edu\ifsul\cc\lpoo\clinica\dao\PersistenciaJPA.class
+br\edu\ifsul\cc\lpoo\clinica\dao\InterfacePersistencia.class
+br\edu\ifsul\cc\lpoo\clinica\Raca_.class
+br\edu\ifsul\cc\lpoo\clinica\Pet.class
+br\edu\ifsul\cc\lpoo\clinica\dao\PersistenciaJDBC.class
+br\edu\ifsul\cc\lpoo\clinica\Pet_.class
+br\edu\ifsul\cc\lpoo\clinica\Raca.class

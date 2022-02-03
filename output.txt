@@ -1,0 +1,122 @@
+cd D:\github\trabalho_LP_CC2022_1; "JAVA_HOME=C:\\Program Files\\Java\\jdk1.8.0_181" cmd /c "\"C:\\Program Files\\NetBeans-12.6\\netbeans\\java\\maven\\bin\\mvn.cmd\" \"-Dmaven.ext.class.path=C:\\Program Files\\NetBeans-12.6\\netbeans\\java\\maven-nblib\\netbeans-eventspy.jar\" -Dfile.encoding=UTF-8 clean install"
+Scanning for projects...
+
+----------< br.edu.ifsul.cc.lpoo.cs:ProjetoCSV3_LPOO_2021_2 >-----------
+Building ProjetoCSV3_LPOO_2021_2 1.0
+--------------------------------[ jar ]---------------------------------
+
+--- maven-clean-plugin:2.5:clean (default-clean) @ ProjetoCSV3_LPOO_2021_2 ---
+Deleting D:\github\trabalho_LP_CC2022_1\target
+
+--- maven-resources-plugin:2.6:resources (default-resources) @ ProjetoCSV3_LPOO_2021_2 ---
+Using 'UTF-8' encoding to copy filtered resources.
+Copying 1 resource
+
+--- maven-compiler-plugin:3.1:compile (default-compile) @ ProjetoCSV3_LPOO_2021_2 ---
+Changes detected - recompiling the module!
+Compiling 5 source files to D:\github\trabalho_LP_CC2022_1\target\classes
+br/edu/ifsul/cc/lpoo/clinica/dao/PersistenciaJDBC.java:[25,42] unmappable character for encoding UTF-8
+br/edu/ifsul/cc/lpoo/clinica/dao/PersistenciaJDBC.java:[42,40] unmappable character for encoding UTF-8
+/D:/github/trabalho_LP_CC2022_1/src/main/java/br/edu/ifsul/cc/lpoo/clinica/dao/PersistenciaJDBC.java: Some input files use unchecked or unsafe operations.
+/D:/github/trabalho_LP_CC2022_1/src/main/java/br/edu/ifsul/cc/lpoo/clinica/dao/PersistenciaJDBC.java: Recompile with -Xlint:unchecked for details.
+
+--- maven-resources-plugin:2.6:testResources (default-testResources) @ ProjetoCSV3_LPOO_2021_2 ---
+Using 'UTF-8' encoding to copy filtered resources.
+skip non existing resourceDirectory D:\github\trabalho_LP_CC2022_1\src\test\resources
+
+--- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ ProjetoCSV3_LPOO_2021_2 ---
+Changes detected - recompiling the module!
+Compiling 2 source files to D:\github\trabalho_LP_CC2022_1\target\test-classes
+br/edu/ifsul/cc/lpoo/clinica/test/TestePersistenciaJDBC.java:[18,38] unmappable character for encoding UTF-8
+br/edu/ifsul/cc/lpoo/clinica/test/TestePersistenciaJDBC.java:[22,56] unmappable character for encoding UTF-8
+br/edu/ifsul/cc/lpoo/clinica/test/TestPersistenciaJPA.java:[17,38] unmappable character for encoding UTF-8
+br/edu/ifsul/cc/lpoo/clinica/test/TestPersistenciaJPA.java:[25,53] unmappable character for encoding UTF-8
+
+--- maven-surefire-plugin:2.12.4:test (default-test) @ ProjetoCSV3_LPOO_2021_2 ---
+Surefire report directory: D:\github\trabalho_LP_CC2022_1\target\surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running br.edu.ifsul.cc.lpoo.clinica.test.TestePersistenciaJDBC
+Abrindo conex?o com: jdbc:postgresql://localhost:5432/trabalho2021 ...
+Conex?o estabelecida!
+Entrou aqui
+Saiu!
+A conex?o foi encerrada.
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.188 sec
+Running br.edu.ifsul.cc.lpoo.clinica.test.TestPersistenciaJPA
+fev 03, 2022 9:05:57 AM org.hibernate.ejb.HibernatePersistence logDeprecation
+WARN: HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+fev 03, 2022 9:05:57 AM org.hibernate.ejb.HibernatePersistence logDeprecation
+WARN: HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+fev 03, 2022 9:05:58 AM org.hibernate.jpa.internal.util.LogHelper logPersistenceUnitInformation
+INFO: HHH000204: Processing PersistenceUnitInfo [
+	name: trabalho2021
+	...]
+fev 03, 2022 9:05:58 AM org.hibernate.Version logVersion
+INFO: HHH000412: Hibernate Core {5.3.3.Final}
+fev 03, 2022 9:05:58 AM org.hibernate.cfg.Environment <clinit>
+INFO: HHH000206: hibernate.properties not found
+fev 03, 2022 9:05:58 AM org.hibernate.annotations.common.reflection.java.JavaReflectionManager <clinit>
+INFO: HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+fev 03, 2022 9:05:58 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
+WARN: HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+fev 03, 2022 9:05:58 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/trabalho2021]
+fev 03, 2022 9:05:58 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH10001001: Connection properties: {user=postgres, password=****}
+fev 03, 2022 9:05:58 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH10001003: Autocommit mode: false
+fev 03, 2022 9:05:58 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections <init>
+INFO: HHH000115: Hibernate connection pool size: 20 (min=1)
+fev 03, 2022 9:05:58 AM org.hibernate.dialect.Dialect <init>
+INFO: HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+fev 03, 2022 9:05:58 AM org.hibernate.engine.jdbc.env.internal.LobCreatorBuilderImpl useContextualLobCreation
+INFO: HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+fev 03, 2022 9:05:58 AM org.hibernate.type.BasicTypeRegistry register
+INFO: HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@6b6776cb
+fev 03, 2022 9:05:59 AM org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl getIsolatedConnection
+INFO: HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@452c8a40] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+fev 03, 2022 9:05:59 AM org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl getIsolatedConnection
+INFO: HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@1e411d81] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+fev 03, 2022 9:05:59 AM org.hibernate.tool.schema.internal.SchemaCreatorImpl applyImportSources
+INFO: HHH000476: Executing import script 'org.hibernate.tool.schema.internal.exec.ScriptSourceInputNonExistentImpl@76adb233'
+fev 03, 2022 9:05:59 AM org.hibernate.hql.internal.QueryTranslatorFactoryInitiator initiateService
+INFO: HHH000397: Using ASTQueryTranslatorFactory
+Conex?o estabelecida!via JPA
+Adicionando racas no db...
+Mostrando racas
+Id	Nome
+1	Poodle
+2	Pinxer
+3	shiba
+4	Border collie
+5	Pastor Alemao
+Adicionando pets no db...
+Mostrando pets
+Id	Nome	Nascimento
+1	Cachorrinho	15/05/2021 09:05:59:645
+2	Bolinha	15/05/2021 09:05:59:645
+3	Lulu	15/05/2021 09:05:59:645
+4	Laica	15/05/2021 09:05:59:645
+5	Dudu	15/05/2021 09:05:59:645
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.846 sec
+
+Results :
+
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
+
+
+--- maven-jar-plugin:2.4:jar (default-jar) @ ProjetoCSV3_LPOO_2021_2 ---
+Building jar: D:\github\trabalho_LP_CC2022_1\target\ProjetoCSV3_LPOO_2021_2-1.0.jar
+
+--- maven-install-plugin:2.4:install (default-install) @ ProjetoCSV3_LPOO_2021_2 ---
+Installing D:\github\trabalho_LP_CC2022_1\target\ProjetoCSV3_LPOO_2021_2-1.0.jar to C:\Users\roger\.m2\repository\br\edu\ifsul\cc\lpoo\cs\ProjetoCSV3_LPOO_2021_2\1.0\ProjetoCSV3_LPOO_2021_2-1.0.jar
+Installing D:\github\trabalho_LP_CC2022_1\pom.xml to C:\Users\roger\.m2\repository\br\edu\ifsul\cc\lpoo\cs\ProjetoCSV3_LPOO_2021_2\1.0\ProjetoCSV3_LPOO_2021_2-1.0.pom
+------------------------------------------------------------------------
+BUILD SUCCESS
+------------------------------------------------------------------------
+Total time:  6.518 s
+Finished at: 2022-02-03T09:06:00-02:00
+------------------------------------------------------------------------
