@@ -1,11 +1,11 @@
 
-package br.edu.ifsul.cc.lpoo.clinica.dao;
+package br.edu.ifsul.cc.lpoo.cv.dao;
 
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
-import br.edu.ifsul.cc.lpoo.clinica.*;
+import br.edu.ifsul.cc.lpoo.cv.*;
 
 public class PersistenciaJPA implements InterfacePersistencia {
 

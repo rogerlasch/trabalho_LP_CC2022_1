@@ -1,5 +1,5 @@
 
-package br.edu.ifsul.cc.lpoo.clinica.dao;
+package br.edu.ifsul.cc.lpoo.cv.dao;
 
 import java.util.List;
 import java.util.Calendar;
@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
-import br.edu.ifsul.cc.lpoo.clinica.*;
+import br.edu.ifsul.cc.lpoo.cv.*;
 
 
 public class PersistenciaJDBC implements InterfacePersistencia {
@@ -65,7 +65,7 @@ return p;
 }
 else if(c==Raca.class)
 {
-PreparedStatement ps=this.con.prepareStatement("select id, nome from raca where id = ?");
+PreparedStatement ps=this.con.prepareStatement("select ra.id, ra.nome, ra.especie_id, esp.nome from tb_raca as ra, tb_especie as esp where ra.id=? and esp.id=ra.especie_id");
 ps.setInt(1, ((Raca)id).getId());
 ResultSet rs=ps.executeQuery();
 if(rs.next())
@@ -73,9 +73,51 @@ if(rs.next())
 Raca ra=new Raca();
 ra.setId(rs.getInt("id"));
 ra.setNome(rs.getString("nome"));
+Especie esp=new Especie();
+esp.setId(rs.getInt("especie_id"));
+esp.setNome(rs.getString("nome"));
+ra.setEspecie(esp);
 return ra;
 }
 }
+else if(c==Especie.class)
+{
+PreparedStatement ps=this.con.prepareStatement("select id, nome from tb_especie where id = ?");
+ps.setInt(1, ((Especie)id).getId());
+ResultSet rs=ps.executeQuery();
+if(rs.next())
+{
+Especie esp=new Especie();
+esp.setId(rs.getInt("id"));
+esp.setNome(rs.getString("nome"));
+return esp;
+}
+}
+else if(c==Cliente.class)
+{
+PreparedStatement ps=this.con.prepareStatement("select id, nome from tb_especie where id = ?");
+ps.setString(1, ((Cliente)id).getCpf());
+ResultSet rs=ps.executeQuery();
+if(rs.next())
+{
+Cliente cl=new Cliente();
+cl.setNome(rs.getString("nome"));
+cl.setCpf(rs.getString("cpf"));
+cl.setRG(rs.getString("rg"));
+cl.setEmail(rs.getString("email"));
+cl.setSenha(rs.getString("senha"));
+cl.setNumero_celular(rs.getString("numero_celular"));
+cl.setCep(rs.getString("cep"));
+cl.setEndereco(rs.getString("endereco"));
+cl.setComplemento(rs.getString("complemento"));
+java.sql.Date dt=rs.getDate("data_nascimento");
+Calendar cd=Calendar.getInstance();
+cd.setTime(dt);
+cl.setData_nascimento(cd);
+return cl;
+}
+}
+
         return null;
     }
     @Override
@@ -111,9 +153,10 @@ Raca ra=(Raca)o;
 if(ra.getId()==null)
 {
 PreparedStatement ps = this.con.prepareStatement("insert into tb_raca"
-+ "(id, nome) values "
++ "(id, nome, especie_id) values "
 +"(nextval('seq_raca_id'), ?)", new String[]{"id"});
                 ps.setString(1, ra.getNome());
+ps.setInt(2, ra.getEspecie().getId());
                 ps.executeUpdate();
 ResultSet rs = ps.getGeneratedKeys();
 if (rs.next()) {
@@ -126,6 +169,53 @@ PreparedStatement ps = this.con.prepareStatement("update tb_raca set nome = ? wh
 ps.setString(1, ra.getNome());
 ps.setInt(2, ra.getId());
 ps.executeUpdate();
+}
+}
+else if(o==Especie.class)
+{
+Especie esp=(Especie)o;
+if(esp.getId()==null)
+{
+PreparedStatement ps = this.con.prepareStatement("insert into tb_especie"
++ "(id, nome) values "
++"(nextval('seq_especie_id'), ?)", new String[]{"id"});
+                ps.setString(1, esp.getNome());
+                ps.executeUpdate();
+ResultSet rs = ps.getGeneratedKeys();
+if (rs.next()) {
+esp.setId(rs.getInt(1));
+                }
+}
+else
+{
+PreparedStatement ps = this.con.prepareStatement("update tb_especie set nome = ? where id = ?");
+ps.setString(1, esp.getNome());
+ps.setInt(2, esp.getId());
+ps.executeUpdate();
+}
+}
+else if(o==Cliente.class)
+{
+Cliente c=(Cliente)o;
+if(c.getNome()==null)
+{
+PreparedStatement ps = this.con.prepareStatement("insert into tb_cliente(nome, cpf, rg, senha, email, numero_celular, endereco, cep, complemento) values(?, ?, ?, ?, ?, ?, ?, ?,?)");
+                ps.setString(1, c.getNome());
+ps.setString(2, c.getCpf());
+ps.setString(3, c.getRG());
+ps.setString(4, c.getSenha());
+ps.setString(5, c.getEmail());
+ps.setString(6, c.getNumero_celular());
+ps.setString(7, c.getEndereco());
+ps.setString(8, c.getComplemento());
+ps.setString(9, c.getCep());
+                ps.executeUpdate();
+ResultSet rs = ps.getGeneratedKeys();
+if (rs.next()) {
+                }
+}
+else
+{
 }
 }
     }

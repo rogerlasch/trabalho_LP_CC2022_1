@@ -1,6 +1,6 @@
 
 
-package br.edu.ifsul.cc.lpoo.clinica;
+package br.edu.ifsul.cc.lpoo.cv;
 
 import java.*;
 import java.io.*;
@@ -24,6 +24,9 @@ public class Raca implements Serializable
 private Integer id;
     @Column(nullable = false, length=256)
 private String nome;
+    @ManyToOne
+    @JoinColumn(name = "especie_id", nullable = false)
+Especie especie;
 public Raca()
 {
 }
@@ -42,5 +45,13 @@ return this.nome;
 public void setNome(String nome)
 {
 this.nome=nome;
+}
+public void setEspecie(Especie esp)
+{
+this.especie=especie;
+}
+public Especie getEspecie()
+{
+return this.especie;
 }
 }

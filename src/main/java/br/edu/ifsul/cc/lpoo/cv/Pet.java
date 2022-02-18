@@ -1,6 +1,6 @@
 
 
-package br.edu.ifsul.cc.lpoo.clinica;
+package br.edu.ifsul.cc.lpoo.cv;
 
 
 import java.*;
@@ -29,8 +29,30 @@ private String nome;
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
 private Calendar data_nascimento;
+    @ManyToOne
+    @JoinColumn(name = "cliente_id", nullable = false)
+Cliente cliente;
+    @ManyToOne
+    @JoinColumn(name = "raca_id", nullable = false)
+Raca raca;
 public Pet()
 {
+}
+public void setCliente(Cliente c)
+{
+this.cliente=c;
+}
+public Cliente getCliente()
+{
+return this.cliente;
+}
+public void setRaca(Raca r)
+{
+this.raca=r;
+}
+public Raca getRaca()
+{
+return this.raca;
 }
 public Integer getId()
 {

@@ -1,8 +1,8 @@
 
-package br.edu.ifsul.cc.lpoo.clinica.dao;
+package br.edu.ifsul.cc.lpoo.cv.dao;
 
 import java.util.List;
-import br.edu.ifsul.cc.lpoo.clinica.*;
+import br.edu.ifsul.cc.lpoo.cv.*;
 
 public interface InterfacePersistencia {
     public Boolean conexaoAberta();
