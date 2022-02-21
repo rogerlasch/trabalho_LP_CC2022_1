@@ -26,7 +26,7 @@ public class Pet implements Serializable
 private Integer id;
     @Column(nullable = false, length=256)
 private String nome;
-    @Column(nullable = false)
+    @Column(nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
 private Calendar data_nascimento;
     @ManyToOne

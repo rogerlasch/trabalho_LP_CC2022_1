@@ -12,14 +12,14 @@ import java.sql.SQLException;
 import org.junit.Test;
 
 public class TestePersistenciaJDBC {
-@Test
+//@Test
     public void testConexao() throws Exception {
         PersistenciaJDBC persistencia = new PersistenciaJDBC();
         if(persistencia.conexaoAberta()){
-            System.out.println("Conexão estabelecida!");
+            System.out.println("Conexao estabelecida!");
             persistencia.fecharConexao();
         }else{
-            System.out.println("Falhou ao abrir a conexão.via JDBC");
+            System.out.println("Falhou ao abrir a conexao.via JDBC");
         }
     }
 }

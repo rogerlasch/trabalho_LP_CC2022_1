@@ -48,7 +48,7 @@ this.nome=nome;
 }
 public void setEspecie(Especie esp)
 {
-this.especie=especie;
+this.especie=esp;
 }
 public Especie getEspecie()
 {

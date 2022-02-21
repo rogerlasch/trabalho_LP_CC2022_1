@@ -48,18 +48,28 @@ public class PersistenciaJDBC implements InterfacePersistencia {
     public Object find(Class c, Object id) throws Exception {
 if(c==Pet.class)
 {
-PreparedStatement ps=this.con.prepareStatement("select id, nome, data_nascimento  from pets where id = ?");
+PreparedStatement ps=this.con.prepareStatement("select p.nome, p.id, p.cliente_id, p.raca_id, r.nome, esp.id, esp.nome, c.nome, c.cpf, c.rg, c.endereco from tb_pet as p, tb_clientes as c, tb_raca as r, tb_especie as esp where p.id=? and p.cliente_id=c.cpf and p.raca_id=r.id and r.especie_id=esp.id;");
 ps.setInt(1, ((Pet)id).getId());
 ResultSet rs=ps.executeQuery();
 if(rs.next())
 {
 Pet p=new Pet();
-p.setId(rs.getInt("id"));
+Cliente cc=new Cliente();
+Especie esp=new Especie();
+Raca r=new Raca();
 p.setNome(rs.getString("nome"));
-java.sql.Date dt=rs.getDate("data_nascimento");
-Calendar cd=Calendar.getInstance();
-cd.setTime(dt);
-p.setDataNascimento(cd);
+p.setId(rs.getInt("id"));
+cc.setCpf(rs.getString("cliente_id"));
+r.setId(rs.getInt("raca_id"));
+r.setNome(rs.getString("nome"));
+esp.setId(rs.getInt("id"));
+esp.setNome(rs.getString("nome"));
+cc.setNome(rs.getString("nome"));
+cc.setRG(rs.getString("rg"));
+cc.setEndereco(rs.getString("endereco"));
+r.setEspecie(esp);
+p.setRaca(r);
+p.setCliente(cc);
 return p;
 }
 }
@@ -117,7 +127,6 @@ cl.setData_nascimento(cd);
 return cl;
 }
 }
-
         return null;
     }
     @Override
@@ -128,22 +137,30 @@ Pet p=(Pet)o;
 if(p.getId()==null)
 {
 PreparedStatement ps = this.con.prepareStatement("insert into tb_pet"
-+ "(id, nome, datanascimento) values "
-+"(nextval('seq_pet_id'), ?, ?)", new String[]{"id"});
++ "(id, nome, cliente_id, raca_id) values "
++"(nextval('seq_pet_id'), ?, ?, ?)", new String[]{"id"});
                 ps.setString(1, p.getNome());
-java.sql.Date dt=new java.sql.Date(p.getDataNascimento().getTimeInMillis());
+ps.setString(2, p.getCliente().getCpf());
+ps.setInt(3, p.getRaca().getId());
+//java.sql.Date dt=new java.sql.Date(p.getDataNascimento().getTimeInMillis());
                 ps.executeUpdate();
 ResultSet rs = ps.getGeneratedKeys();
 if (rs.next()) {
 p.setId(rs.getInt(1));
                 }
+ps=this.con.prepareStatement("insert into tb_cliente_pet(cliente_id, pet_id) values(?, ?)");
+ps.setString(1, p.getCliente().getCpf());
+ps.setInt(2, p.getId());
+                ps.executeUpdate();
 }
 else
 {
-PreparedStatement ps = this.con.prepareStatement("update tb_pet set nome = ? data_nascimento = ? where id = ?");
+PreparedStatement ps = this.con.prepareStatement("update tb_pet set nome = ?, cliente_id = ?, raca_id = ? where id = ?");
 ps.setString(1, p.getNome());
-ps.setDate(2, new java.sql.Date(p.getDataNascimento().getTimeInMillis()));
-ps.setInt(3, p.getId());
+ps.setString(2, p.getCliente().getCpf());
+ps.setInt(3, p.getRaca().getId());
+//ps.setDate(2, new java.sql.Date(p.getDataNascimento().getTimeInMillis()));
+ps.setInt(4, p.getId());
 ps.executeUpdate();
 }
 }
@@ -171,6 +188,21 @@ ps.setInt(2, ra.getId());
 ps.executeUpdate();
 }
 }
+else if(o==Cliente.class)
+{
+Cliente c=(Cliente)o;
+PreparedStatement ps = this.con.prepareStatement("insert into tb_cliente(nome, cpf, rg, senha, email, numero_celular, endereco, cep, complemento) values(?, ?, ?, ?, ?, ?, ?, ?,?)");
+                ps.setString(1, c.getNome());
+ps.setString(2, c.getCpf());
+ps.setString(3, c.getRG());
+ps.setString(4, c.getSenha());
+ps.setString(5, c.getEmail());
+ps.setString(6, c.getNumero_celular());
+ps.setString(7, c.getEndereco());
+ps.setString(8, c.getComplemento());
+ps.setString(9, c.getCep());
+                ps.executeUpdate();
+}
 else if(o==Especie.class)
 {
 Especie esp=(Especie)o;
@@ -194,30 +226,7 @@ ps.setInt(2, esp.getId());
 ps.executeUpdate();
 }
 }
-else if(o==Cliente.class)
-{
-Cliente c=(Cliente)o;
-if(c.getNome()==null)
-{
-PreparedStatement ps = this.con.prepareStatement("insert into tb_cliente(nome, cpf, rg, senha, email, numero_celular, endereco, cep, complemento) values(?, ?, ?, ?, ?, ?, ?, ?,?)");
-                ps.setString(1, c.getNome());
-ps.setString(2, c.getCpf());
-ps.setString(3, c.getRG());
-ps.setString(4, c.getSenha());
-ps.setString(5, c.getEmail());
-ps.setString(6, c.getNumero_celular());
-ps.setString(7, c.getEndereco());
-ps.setString(8, c.getComplemento());
-ps.setString(9, c.getCep());
-                ps.executeUpdate();
-ResultSet rs = ps.getGeneratedKeys();
-if (rs.next()) {
-                }
-}
-else
-{
-}
-}
+
     }
 
     @Override
@@ -230,8 +239,20 @@ ps.execute();
 }
 else if(o==Raca.class)
 {
-PreparedStatement ps = this.con.prepareStatement("delete from tb_Raca where id = ?");
+PreparedStatement ps = this.con.prepareStatement("delete from tb_raca where id = ?");
 ps.setInt(1, ((Raca)o).getId());
+ps.execute();
+}
+else if(o==Especie.class)
+{
+PreparedStatement ps = this.con.prepareStatement("delete from tb_especie where id = ?");
+ps.setInt(1, ((Especie)o).getId());
+ps.execute();
+}
+else if(o==Cliente.class)
+{
+PreparedStatement ps = this.con.prepareStatement("delete from tb_clientes where cpf = ?");
+ps.setString(1, ((Cliente)o).getCpf());
 ps.execute();
 }
     }
@@ -239,15 +260,27 @@ ps.execute();
 public List<Pet> listPets() throws Exception
 {
         List<Pet> pets=null;
-PreparedStatement ps = this.con.prepareStatement("select id, nome, data_nascimento from pet order by id");
+PreparedStatement ps = this.con.prepareStatement("select p.nome, p.id, p.cliente_id, p.raca_id, r.nome, esp.id, esp.nome, c.nome, c.cpf, c.rg, c.endereco from tb_pet as p, tb_clientes as c, tb_raca as r, tb_especie as esp where p.cliente_id=c.cpf and p.raca_id=r.id and r.especie_id=esp.id");
 ResultSet rs = ps.executeQuery();
 pets = new ArrayList();
         while(rs.next()){
-            Pet p = new Pet();
-p.setId(rs.getInt("id"));
+Pet p=new Pet();
+Cliente cc=new Cliente();
+Especie esp=new Especie();
+Raca r=new Raca();
 p.setNome(rs.getString("nome"));
-Calendar c=Calendar.getInstance();
-c.setTimeInMillis(rs.getDate("data_nascimento").getTime());
+p.setId(rs.getInt("id"));
+cc.setCpf(rs.getString("cliente_id"));
+r.setId(rs.getInt("raca_id"));
+r.setNome(rs.getString("nome"));
+esp.setId(rs.getInt("id"));
+esp.setNome(rs.getString("nome"));
+cc.setNome(rs.getString("nome"));
+cc.setRG(rs.getString("rg"));
+cc.setEndereco(rs.getString("endereco"));
+r.setEspecie(esp);
+p.setRaca(r);
+p.setCliente(cc);
 pets.add(p);
         }
 return pets;
@@ -256,16 +289,19 @@ return pets;
 public List<Raca> listRacas() throws Exception
 {
         List<Raca> racas=null;
-PreparedStatement ps = this.con.prepareStatement("select id, nome from raca order by id");
+PreparedStatement ps = this.con.prepareStatement("select r.nome, r.id, r.especie_id, e.nome from tb_raca as r, tb_especie as e where r.especie_id=e.id;");
 ResultSet rs = ps.executeQuery();
 racas = new ArrayList();
         while(rs.next()){
             Raca r = new Raca();
-r.setId(rs.getInt("id"));
+Especie e=new Especie();
 r.setNome(rs.getString("nome"));
+r.setId(rs.getInt("id"));
+e.setId(rs.getInt("especie_id"));
+e.setNome(rs.getString("nome"));
+r.setEspecie(e);
 racas.add(r);
         }
 return racas;
 }
-
 }
