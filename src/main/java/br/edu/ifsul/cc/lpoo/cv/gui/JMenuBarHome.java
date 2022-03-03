@@ -21,7 +21,9 @@ public class JMenuBarHome extends JMenuBar implements ActionListener {
     private JMenuItem menuItemSair;
 
     private JMenu menuCadastro;
-    private JMenuItem menuItemJogador;
+    private JMenuItem menuItemPet;
+private JMenuItem menuItemRaca;
+private JMenuItem menuItemPessoa;
 
     private Controle controle;
 
@@ -60,13 +62,26 @@ public class JMenuBarHome extends JMenuBar implements ActionListener {
         menuCadastro.setToolTipText("Cadastro"); //acessibilidade
         menuCadastro.setFocusable(true); //acessibilidade
 
-        menuItemJogador = new JMenuItem("Jogador");
-        menuItemJogador.setToolTipText("Jogador"); //acessibilidade
-        menuItemJogador.setFocusable(true); //acessibilidade
+        menuItemPet = new JMenuItem("Pet");
+        menuItemPet.setToolTipText("Pet"); //acessibilidade
+        menuItemPet.setFocusable(true); //acessibilidade
+        menuItemPet.addActionListener(this);
+        menuItemPet.setActionCommand("menu_pet");
+        menuCadastro.add(menuItemPet);
 
-        menuItemJogador.addActionListener(this);
-        menuItemJogador.setActionCommand("menu_jogador");
-        menuCadastro.add(menuItemJogador);
+        menuItemRaca = new JMenuItem("Raca");
+        menuItemRaca.setToolTipText("Raca"); //acessibilidade
+        menuItemRaca.setFocusable(true); //acessibilidade
+        menuItemRaca.addActionListener(this);
+        menuItemRaca.setActionCommand("menu_raca");
+        menuCadastro.add(menuItemRaca);
+
+        menuItemPessoa = new JMenuItem("Pessoa");
+        menuItemPessoa.setToolTipText("Pessoa"); //acessibilidade
+        menuItemPessoa.setFocusable(true); //acessibilidade
+        menuItemPessoa.addActionListener(this);
+        menuItemPessoa.setActionCommand("menu_pet");
+        menuCadastro.add(menuItemPessoa);
 
         this.add(menuArquivo);
         this.add(menuCadastro);
@@ -75,28 +90,32 @@ public class JMenuBarHome extends JMenuBar implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+
         if(e.getActionCommand().equals(menuItemSair.getActionCommand())){
-        
+
             //se o usuario clicou no menuitem Sair
             int d = JOptionPane.showConfirmDialog(this, "Deseja realmente sair do sistema? ", "Sair", JOptionPane.YES_NO_OPTION);
-            if(d == 0){                
+            if(d == 0){
                 controle.fecharBD();//fecha a conexao com o banco de dados.
                 System.exit(0);//finaliza o processo do programa.
             }
-            
-            
-        }else if(e.getActionCommand().equals(menuItemJogador.getActionCommand())){
-            
-                        //se o usuario clicou no menuitem Usuario            
-                        controle.showTela("tela_jogador");          
-                        
-        }else if(e.getActionCommand().equals(menuItemLogout.getActionCommand())){
-            
-                        controle.showTela("tela_autenticacao");    
+
+
+        }else if(e.getActionCommand().equals(menuItemPet.getActionCommand())){
+                        controle.showTela("tela_pet");
+}
+else if(e.getActionCommand().equals(menuItemRaca.getActionCommand())){
+                        controle.showTela("tela_raca");
+}
+else if(e.getActionCommand().equals(menuItemPessoa.getActionCommand())){
+                        controle.showTela("tela_pessoa");
+}
+else if(e.getActionCommand().equals(menuItemLogout.getActionCommand())){
+
+                        controle.showTela("tela_autenticacao");
         }
-        
+
     }
-    
-    
+
+
 }

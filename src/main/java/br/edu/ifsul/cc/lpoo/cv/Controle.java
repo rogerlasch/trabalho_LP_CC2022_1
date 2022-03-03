@@ -6,6 +6,8 @@ import br.edu.ifsul.cc.lpoo.cv.gui.JFramePrincipal;
 import br.edu.ifsul.cc.lpoo.cv.gui.JMenuBarHome;
 import br.edu.ifsul.cc.lpoo.cv.gui.JPanelHome;
 import br.edu.ifsul.cc.lpoo.cv.gui.autenticacao.JPanelAutenticacao;
+import br.edu.ifsul.cc.lpoo.cv.gui.raca.JpRaca;
+import br.edu.ifsul.cc.lpoo.cv.gui.pet.JPet;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,7 +20,9 @@ public class Controle {
 
     private JFramePrincipal frame; // frame principal da minha aplicação gráfica
 
-    private JPanelAutenticacao pnlAutenticacao; //painel para a autenticacao do Jogador.
+    private JPanelAutenticacao pnlAutenticacao;
+private JpRaca jpRaca;
+private JPet jpPet;
 
     private JMenuBarHome menuBar; //menu principal
 
@@ -58,13 +62,16 @@ public class Controle {
         frame = new JFramePrincipal();
 
         pnlAutenticacao = new JPanelAutenticacao(this);
-
+jpRaca=new JpRaca(this);
+jpPet=new JPet(this);
         menuBar = new JMenuBarHome(this);
 
         pnlHome = new JPanelHome(this);
 
 
         frame.addTela(pnlAutenticacao, "tela_autenticacao");//carta 1
+frame.addTela(jpRaca, "tela_raca");
+frame.addTela(jpPet, "tela_pet");
         frame.addTela(pnlHome, "tela_home");//carta 2
         frame.showTela("tela_autenticacao"); // apreseta a carta cujo nome é "tela_autenticacao"
 
@@ -74,23 +81,21 @@ public class Controle {
     }
 
     public void autenticar(String cpf, String senha) {
-/*
-        try{
-
-            Jogador j =  getConexaoJDBC().doLogin(cpf, senha);
-
-            if(j != null){
-
-                JOptionPane.showMessageDialog(pnlAutenticacao, "Jogador "+j.getNickname()+" autenticado com sucesso!", "Autenticação", JOptionPane.INFORMATION_MESSAGE);
-
                 frame.setJMenuBar(menuBar);//adiciona o menu de barra no frame
                 frame.showTela("tela_home");//muda a tela para o painel de boas vindas (home)
+/*
+        try{
+Funcionario f=getConexaoJDBC().doLogin(cpf, senha);
 
+            if(f!=null){
+
+                JOptionPane.showMessageDialog(pnlAutenticacao, "Funcionario"+f.getNome()+" autenticado com sucesso!", "Autenticação", JOptionPane.INFORMATION_MESSAGE);
+                frame.setJMenuBar(menuBar);//adiciona o menu de barra no frame
+                frame.showTela("tela_home");//muda a tela para o painel de boas vindas (home)
             }else{
 
                 JOptionPane.showMessageDialog(pnlAutenticacao, "Dados inválidos!", "Autenticação", JOptionPane.INFORMATION_MESSAGE);
             }
-
         }catch(Exception e){
 
             JOptionPane.showMessageDialog(pnlAutenticacao, "Erro ao executar a autenticação no Banco de Dados!", "Autenticação", JOptionPane.ERROR_MESSAGE);

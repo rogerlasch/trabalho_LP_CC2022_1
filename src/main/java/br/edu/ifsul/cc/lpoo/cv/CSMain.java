@@ -18,7 +18,6 @@ public class CSMain {
 
         try {
                 controle = new Controle();//cria a instancia e atribui para o atributo controle.
-
                 //"caminho feliz" : passo 3
                 if(controle.conectarBD()){
 
@@ -29,7 +28,6 @@ public class CSMain {
 
                         JOptionPane.showMessageDialog(null, "Não conectou no Banco de Dados!", "Banco de Dados", JOptionPane.ERROR_MESSAGE);
                 }
-
         } catch (Exception ex) {
 
                 JOptionPane.showMessageDialog(null, "Erro ao tentar conectar no Banco de Dados: "+ex.getLocalizedMessage(), "Banco de Dados", JOptionPane.ERROR_MESSAGE);

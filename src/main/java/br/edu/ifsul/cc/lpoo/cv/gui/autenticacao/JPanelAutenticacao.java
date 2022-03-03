@@ -22,66 +22,66 @@ import javax.swing.border.LineBorder;
  * @author telmo
  */
 public class JPanelAutenticacao extends JPanel implements ActionListener {
-    
+
     private Controle controle;
     private GridBagLayout gridLayout;
     private GridBagConstraints posicionador;
-    
-    private JLabel  lblNickname;
+
+    private JLabel  lbUser;
     private JLabel lblSenha;
-    private JTextField txfNickname;
-    private JPasswordField psfSenha;
+    private JTextField txUser;
+    private JPasswordField txSenha;
     private JButton btnLogar;
     private Border defaultBorder;
-    
+
     //construtor da classe que recebe um parametro.
     public JPanelAutenticacao(Controle controle){
-        
+
         this.controle = controle;
         initComponents();
     }
-    
+
     private void initComponents(){
-    
+
         gridLayout = new GridBagLayout();//inicializando o gerenciador de layout
         this.setLayout(gridLayout);//definie o gerenciador para este painel.
-        
-        lblNickname = new JLabel("Nickname:");        
-        lblNickname.setToolTipText("lblNickname"); //acessibilidade
+
+        lbUser = new JLabel("CPF:");
+        lbUser.setToolTipText("CPF"); //acessibilidade
         posicionador = new GridBagConstraints();
         posicionador.gridy = 0;//policao da linha (vertical)
         posicionador.gridx = 0;// posição da coluna (horizontal)
-        this.add(lblNickname, posicionador);//o add adiciona o rotulo no painel
-        
-        txfNickname = new JTextField(10);
-        txfNickname.setFocusable(true);    //acessibilidade    
-        txfNickname.setToolTipText("txfNickname"); //acessibilidade
-        Util.considerarEnterComoTab(txfNickname);
+        this.add(lbUser, posicionador);//o add adiciona o rotulo no painel
+
+        txUser = new JTextField(10);
+        txUser.setFocusable(true);    //acessibilidade
+        txUser.setToolTipText("CPF"); //acessibilidade
+        Util.considerarEnterComoTab(txUser);
         posicionador = new GridBagConstraints();
         posicionador.gridy = 0;//policao da linha (vertical)
         posicionador.gridx = 1;// posição da coluna (horizontal)
-        defaultBorder = txfNickname.getBorder();
-        this.add(txfNickname, posicionador);//o add adiciona o rotulo no painel        
-        
-        lblSenha = new JLabel("Senha:");        
-        lblSenha.setToolTipText("lblSenha"); //acessibilidade        
+        defaultBorder = txUser.getBorder();
+        this.add(txUser, posicionador);//o add adiciona o rotulo no painel
+
+        lblSenha = new JLabel("Senha:");
+        lblSenha.setToolTipText("Senha"); //acessibilidade
         posicionador = new GridBagConstraints();
         posicionador.gridy = 1;//policao da linha (vertical)
         posicionador.gridx = 0;// posição da coluna (horizontal)
         this.add(lblSenha, posicionador);//o add adiciona o rotulo no painel
-        
-        psfSenha = new JPasswordField(10);
-        psfSenha.setFocusable(true);    //acessibilidade    
-        psfSenha.setToolTipText("psfSenha"); //acessibilidade  
-        Util.considerarEnterComoTab(psfSenha);
+
+        txSenha = new JPasswordField(10);
+        txSenha.setFocusable(true);    //acessibilidade
+        txSenha.setToolTipText("Senha"); //acessibilidade
+        Util.considerarEnterComoTab(txSenha);
         posicionador = new GridBagConstraints();
         posicionador.gridy = 1;//policao da linha (vertical)
         posicionador.gridx = 1;// posição da coluna (horizontal)
-        this.add(psfSenha, posicionador);//o add adiciona o rotulo no painel  
+        this.add(txSenha, posicionador);//o add adiciona o rotulo no painel
 
-        btnLogar = new JButton("Autenticar");
-        btnLogar.setFocusable(true);    //acessibilidade    
-        btnLogar.setToolTipText("btnLogar"); //acessibilidade  
+        btnLogar = new JButton("Logar");
+        btnLogar.setFocusable(true);    //acessibilidade
+        btnLogar.setToolTipText("Logar!"); //acessibilidade
         Util.registraEnterNoBotao(btnLogar);
         posicionador = new GridBagConstraints();
         posicionador.gridy = 2;//policao da linha (vertical)
@@ -89,59 +89,59 @@ public class JPanelAutenticacao extends JPanel implements ActionListener {
         btnLogar.addActionListener(this);//registrar o botão no Listener
         btnLogar.setActionCommand("comando_autenticar");
         this.add(btnLogar, posicionador);//o add adiciona o rotulo no painel
-                
+
 
     }
 
     public void requestFocus(){
-        
-        txfNickname.requestFocus();
+
+        txUser.requestFocus();
     }
-    
+
     public void cleanForm(){
-        
-        txfNickname.setText("");
-        psfSenha.setText("");        
-        
-        txfNickname.setBorder(defaultBorder);        
-        psfSenha.setBorder(defaultBorder);
+
+        txUser.setText("");
+        txSenha.setText("");
+
+        txUser.setBorder(defaultBorder);
+        txSenha.setBorder(defaultBorder);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-                
+
             //testa para verificar se o botão btnLogar foi clicado.
             if(e.getActionCommand().equals(btnLogar.getActionCommand())){
-            
+
                 //validacao do formulario.
-                if(txfNickname.getText().trim().length() > 4){
-                                        
-                    txfNickname.setBorder(new LineBorder(Color.green,1));
-                    
-                    if(new String(psfSenha.getPassword()).trim().length() > 3 ){
-                                                
-                        psfSenha.setBorder(new LineBorder(Color.green,1));
-                        
-                        controle.autenticar(txfNickname.getText().trim(), new String(psfSenha.getPassword()).trim());
-                        
+                if(txUser.getText().trim().length() > 4){
+
+                    txUser.setBorder(new LineBorder(Color.green,1));
+
+                    if(new String(txSenha.getPassword()).trim().length() > 3 ){
+
+                        txSenha.setBorder(new LineBorder(Color.green,1));
+
+                        controle.autenticar(txUser.getText().trim(), new String(txSenha.getPassword()).trim());
+
                     }else{
-                        
+
                         JOptionPane.showMessageDialog(this, "Informe Senha com 4 ou mais dígitos", "Autenticação", JOptionPane.ERROR_MESSAGE);
-                        psfSenha.setBorder(new LineBorder(Color.red,1));
-                        psfSenha.requestFocus();                        
-                        
+                        txSenha.setBorder(new LineBorder(Color.red,1));
+                        txSenha.requestFocus();
+
                     }
-                    
+
                 }else{
-                
-                    JOptionPane.showMessageDialog(this, "Informe Nickname com 4 ou mais dígitos", "Autenticação", JOptionPane.ERROR_MESSAGE);                    
-                    txfNickname.setBorder(new LineBorder(Color.red,1));
-                    txfNickname.requestFocus();
+
+                    JOptionPane.showMessageDialog(this, "Informe CPF com 11 d�gitos.", "Autentica��o", JOptionPane.ERROR_MESSAGE);
+                    txUser.setBorder(new LineBorder(Color.red,1));
+                    txUser.requestFocus();
                 }
-                                      
-            
-        } 
-        
+
+
+        }
+
     }
-    
+
 }

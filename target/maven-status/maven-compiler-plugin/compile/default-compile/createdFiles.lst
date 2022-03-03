@@ -1,7 +1,7 @@
+br\edu\ifsul\cc\lpoo\cv\gui\pet\JPet.class
 br\edu\ifsul\cc\lpoo\cv\model\Cliente.class
 br\edu\ifsul\cc\lpoo\cv\model\Produto.class
 br\edu\ifsul\cc\lpoo\cv\model\Pet.class
-br\edu\ifsul\cc\lpoo\cv\gui\funcionario\FuncionarioDialog.class
 br\edu\ifsul\cc\lpoo\cv\model\dao\InterfacePersistencia.class
 br\edu\ifsul\cc\lpoo\cv\model\Fornecedor.class
 br\edu\ifsul\cc\lpoo\cv\model\Especie.class
@@ -28,6 +28,7 @@ br\edu\ifsul\cc\lpoo\cv\model\Pet_.class
 br\edu\ifsul\cc\lpoo\cv\model\Venda_.class
 br\edu\ifsul\cc\lpoo\cv\gui\JFramePrincipal.class
 br\edu\ifsul\cc\lpoo\cv\gui\autenticacao\JPanelAutenticacao.class
+br\edu\ifsul\cc\lpoo\cv\gui\raca\JpRaca.class
 br\edu\ifsul\cc\lpoo\cv\model\Consulta_.class
 br\edu\ifsul\cc\lpoo\cv\util\Util.class
 br\edu\ifsul\cc\lpoo\cv\model\Agenda.class
