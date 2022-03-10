@@ -6,7 +6,8 @@ import br.edu.ifsul.cc.lpoo.cv.gui.JFramePrincipal;
 import br.edu.ifsul.cc.lpoo.cv.gui.JMenuBarHome;
 import br.edu.ifsul.cc.lpoo.cv.gui.JPanelHome;
 import br.edu.ifsul.cc.lpoo.cv.gui.autenticacao.JPanelAutenticacao;
-import br.edu.ifsul.cc.lpoo.cv.gui.raca.JpRaca;
+import br.edu.ifsul.cc.lpoo.cv.gui.raca.JRaca;
+import br.edu.ifsul.cc.lpoo.cv.gui.especie.JEspecie;
 import br.edu.ifsul.cc.lpoo.cv.gui.pet.JPet;
 import javax.swing.JOptionPane;
 
@@ -21,7 +22,8 @@ public class Controle {
     private JFramePrincipal frame; // frame principal da minha aplicação gráfica
 
     private JPanelAutenticacao pnlAutenticacao;
-private JpRaca jpRaca;
+private JRaca jraca;
+private JEspecie jespecie;
 private JPet jpPet;
 
     private JMenuBarHome menuBar; //menu principal
@@ -62,7 +64,8 @@ private JPet jpPet;
         frame = new JFramePrincipal();
 
         pnlAutenticacao = new JPanelAutenticacao(this);
-jpRaca=new JpRaca(this);
+jraca=new JRaca(this);
+jespecie=new JEspecie(this);
 jpPet=new JPet(this);
         menuBar = new JMenuBarHome(this);
 
@@ -70,7 +73,8 @@ jpPet=new JPet(this);
 
 
         frame.addTela(pnlAutenticacao, "tela_autenticacao");//carta 1
-frame.addTela(jpRaca, "tela_raca");
+frame.addTela(jraca, "tela_raca");
+frame.addTela(jespecie, "tela_especie");
 frame.addTela(jpPet, "tela_pet");
         frame.addTela(pnlHome, "tela_home");//carta 2
         frame.showTela("tela_autenticacao"); // apreseta a carta cujo nome é "tela_autenticacao"

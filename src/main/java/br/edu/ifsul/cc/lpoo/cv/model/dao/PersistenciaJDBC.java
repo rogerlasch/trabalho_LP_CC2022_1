@@ -304,4 +304,20 @@ racas.add(r);
         }
 return racas;
 }
+public List<Especie> listEspecies() throws Exception
+{
+        List<Especie> especies=null;
+PreparedStatement ps = this.con.prepareStatement("select id, nome from tb_especie;");
+ResultSet rs = ps.executeQuery();
+especies = new ArrayList();
+        while(rs.next()){
+            Especie esp = new Especie();
+esp.setId(rs.getInt("id"));
+esp.setNome(rs.getString("nome"));
+especies.add(esp);
+        }
+return especies;
+}
+
+
 }
