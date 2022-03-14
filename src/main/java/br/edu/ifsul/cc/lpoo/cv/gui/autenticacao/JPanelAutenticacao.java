@@ -46,8 +46,8 @@ public class JPanelAutenticacao extends JPanel implements ActionListener {
         gridLayout = new GridBagLayout();//inicializando o gerenciador de layout
         this.setLayout(gridLayout);//definie o gerenciador para este painel.
 
-        lbUser = new JLabel("CPF:");
-        lbUser.setToolTipText("CPF"); //acessibilidade
+        lbUser = new JLabel("Numero_ctps:");
+        lbUser.setToolTipText("Numero_ctps"); //acessibilidade
         posicionador = new GridBagConstraints();
         posicionador.gridy = 0;//policao da linha (vertical)
         posicionador.gridx = 0;// posiÃ§Ã£o da coluna (horizontal)
@@ -55,7 +55,7 @@ public class JPanelAutenticacao extends JPanel implements ActionListener {
 
         txUser = new JTextField(10);
         txUser.setFocusable(true);    //acessibilidade
-        txUser.setToolTipText("CPF"); //acessibilidade
+        txUser.setToolTipText("Numero_ctps"); //acessibilidade
         Util.considerarEnterComoTab(txUser);
         posicionador = new GridBagConstraints();
         posicionador.gridy = 0;//policao da linha (vertical)
@@ -134,7 +134,7 @@ public class JPanelAutenticacao extends JPanel implements ActionListener {
 
                 }else{
 
-                    JOptionPane.showMessageDialog(this, "Informe CPF com 11 dígitos.", "Autenticação", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Informe Numero_ctps com 11 dígitos.", "Autenticação", JOptionPane.ERROR_MESSAGE);
                     txUser.setBorder(new LineBorder(Color.red,1));
                     txUser.requestFocus();
                 }

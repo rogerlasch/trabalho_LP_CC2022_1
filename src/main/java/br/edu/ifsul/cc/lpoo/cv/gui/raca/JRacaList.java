@@ -21,7 +21,6 @@ public class JRacaList extends javax.swing.JPanel {
     private javax.swing.JScrollPane scpRolagem;
     private javax.swing.JScrollPane scrolEspecies;
     private javax.swing.JTable tblListagem;
-    private javax.swing.JTable especies;
     private javax.swing.JTextField txtfFiltro;
     public JRacaList() {
         initComponents();
@@ -34,15 +33,11 @@ public class JRacaList extends javax.swing.JPanel {
     }
     public void populaTable(){
         DefaultTableModel model =  (DefaultTableModel) tblListagem.getModel();
-        DefaultTableModel model2 =  (DefaultTableModel) especies.getModel();
         model.setRowCount(0);
-model2.setRowCount(0);
         try {
             List<Raca> racas = controle.getConexaoJDBC().listRacas();
             for(Raca r : racas){
-                model.addRow(new Object[]{r.getId(), r.getNome()});
-Especie esp=r.getEspecie();
-model2.addRow(new Object[]{esp.getId(), esp.getNome()});
+                model.addRow(new Object[]{r, r.getId(), r.getNome()});
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Erro ao listar racas :"+ex.getLocalizedMessage(), "racas", JOptionPane.ERROR_MESSAGE);
@@ -58,11 +53,8 @@ model2.addRow(new Object[]{esp.getId(), esp.getNome()});
         jButton1 = new javax.swing.JButton();
         pnlCentro = new javax.swing.JPanel();
         scpRolagem = new javax.swing.JScrollPane();
-scrolEspecies = new javax.swing.JScrollPane();
         tblListagem = new javax.swing.JTable();
 tblListagem.setFocusable(true);
-        especies = new javax.swing.JTable();
-especies.setFocusable(true);
         setLayout(new java.awt.BorderLayout());
         btnNovo.setText("Novo");
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
@@ -93,7 +85,7 @@ especies.setFocusable(true);
             new Object [][] {
             },
             new String [] {
-"Id", "Nome"
+"", "Id", "Nome"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -105,22 +97,6 @@ especies.setFocusable(true);
         });
         scpRolagem.setViewportView(tblListagem);
         pnlCentro.add(scpRolagem, java.awt.BorderLayout.CENTER);
-        especies.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-            },
-            new String [] {
-"Id", "Nome"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-scrolEspecies.setViewportView(especies);
-        pnlCentro.add(scrolEspecies, java.awt.BorderLayout.CENTER);
         add(pnlCentro, java.awt.BorderLayout.CENTER);
 populaTable();
     }
@@ -129,6 +105,8 @@ populaTable();
         pnlRaca.getFormulario().setRacaFormulario(null);
     }
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {
+try
+{
             int indice = tblListagem.getSelectedRow();
             if(indice > -1){
                 DefaultTableModel model =  (DefaultTableModel) tblListagem.getModel();
@@ -136,16 +114,22 @@ populaTable();
                 Raca r = (Raca) linha.get(0);
                 pnlRaca.showTela("tela_raca_formulario");
                 pnlRaca.getFormulario().setRacaFormulario(r);
+            List<Especie> especies= controle.getConexaoJDBC().listEspecies();
+                pnlRaca.getFormulario().setEspecies(especies);
             }else{
                   JOptionPane.showMessageDialog(this, "Selecione uma linha para editar!", "Edição", JOptionPane.INFORMATION_MESSAGE);
             }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao editar raca:"+ex.getLocalizedMessage(), "racas", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+        }
     }
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {
             int indice = tblListagem.getSelectedRow();
             if(indice > -1){
                 DefaultTableModel model =  (DefaultTableModel) tblListagem.getModel();
                 Vector linha = (Vector) model.getDataVector().get(indice);
-                Raca r = (Raca) linha.get(0); 
+                Raca r = (Raca) linha.get(0);
                 try {
                     pnlRaca.getControle().getConexaoJDBC().remover(r);
                     JOptionPane.showMessageDialog(this, "Raca removido!", "Raca", JOptionPane.INFORMATION_MESSAGE);

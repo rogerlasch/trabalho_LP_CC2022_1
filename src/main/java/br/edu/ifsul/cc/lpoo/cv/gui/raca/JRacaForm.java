@@ -2,14 +2,19 @@ package br.edu.ifsul.cc.lpoo.cv.gui.raca;
 
 import br.edu.ifsul.cc.lpoo.cv.Controle;
 import br.edu.ifsul.cc.lpoo.cv.model.Raca;
+import br.edu.ifsul.cc.lpoo.cv.model.Especie;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+
 public class JRacaForm extends javax.swing.JPanel {
     private Controle controle;
     private JRaca pnlRaca;
-    private Raca raca;
+private Raca raca;
+private List<Especie> especies;
+private JComboBox cb_especies;
     private SimpleDateFormat format;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnSave;
@@ -45,6 +50,27 @@ else
 r_name.setText(r.getNome());
 }
     }
+void setEspecies(List<Especie> especies)
+{
+this.especies=especies;
+if(especies==null)
+{
+cb_especies.removeAllItems();
+}
+else
+{
+cb_especies.removeAllItems();
+for(Especie esp : especies)
+{
+cb_especies.addItem(esp.getNome());
+}
+}
+}
+
+List<Especie> getEspecies()
+{
+return this.especies;
+}
     @SuppressWarnings("unchecked")
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
@@ -72,6 +98,7 @@ r_name.setText(r.getNome());
         add(pnlSul, java.awt.BorderLayout.PAGE_END);
         pnlCentro.setLayout(new java.awt.GridBagLayout());
         lb_name.setText("Nome:");
+cb_especies=new JComboBox();
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         pnlCentro.add(lb_name, gridBagConstraints);
@@ -79,6 +106,10 @@ r_name.setText(r.getNome());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         pnlCentro.add(r_name, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        pnlCentro.add(cb_especies, gridBagConstraints);
+
         add(pnlCentro, java.awt.BorderLayout.CENTER);
     }
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {

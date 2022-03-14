@@ -1,7 +1,6 @@
 br\edu\ifsul\cc\lpoo\cv\gui\especie\JEspecieList$2.class
 br\edu\ifsul\cc\lpoo\cv\model\Pet.class
 br\edu\ifsul\cc\lpoo\cv\gui\raca\JRaca.class
-br\edu\ifsul\cc\lpoo\cv\gui\raca\JRacaList$5.class
 br\edu\ifsul\cc\lpoo\cv\gui\especie\JEspecieForm.class
 br\edu\ifsul\cc\lpoo\cv\model\Especie.class
 br\edu\ifsul\cc\lpoo\cv\model\Pessoa_.class
@@ -24,7 +23,6 @@ br\edu\ifsul\cc\lpoo\cv\util\Util.class
 br\edu\ifsul\cc\lpoo\cv\model\Agenda.class
 br\edu\ifsul\cc\lpoo\cv\model\Pessoa.class
 br\edu\ifsul\cc\lpoo\cv\model\Receita_.class
-br\edu\ifsul\cc\lpoo\cv\gui\pet\JPet.class
 br\edu\ifsul\cc\lpoo\cv\gui\especie\JEspecieForm$1.class
 br\edu\ifsul\cc\lpoo\cv\model\Cliente.class
 br\edu\ifsul\cc\lpoo\cv\model\Produto.class
@@ -39,6 +37,7 @@ br\edu\ifsul\cc\lpoo\cv\gui\raca\JRacaList$4.class
 br\edu\ifsul\cc\lpoo\cv\model\Consulta.class
 br\edu\ifsul\cc\lpoo\cv\Controle.class
 br\edu\ifsul\cc\lpoo\cv\model\dao\PersistenciaJDBC.class
+br\edu\ifsul\cc\lpoo\cv\model\Funcionario_.class
 br\edu\ifsul\cc\lpoo\cv\CSMain.class
 br\edu\ifsul\cc\lpoo\cv\gui\JPanelHome.class
 br\edu\ifsul\cc\lpoo\cv\gui\especie\JEspecie.class

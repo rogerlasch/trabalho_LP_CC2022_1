@@ -10,10 +10,13 @@ import javax.persistence.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
+@Entity
+@Table(name="tb_funcionario")
 public class Funcionario extends Pessoa
 {
+    @Column(nullable = false, length=256)
 String numero_ctps;
+    @Column(nullable = false, length=256)
 String numero_pis;
 public Funcionario()
 {

@@ -18,7 +18,8 @@ public class Cliente extends Pessoa
     @Column(nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
 Calendar data_ultima_visita;
-    @ManyToMany
+//    @ManyToMany
+@OneToMany
     @JoinTable(name = "tb_cliente_pet", joinColumns = {@JoinColumn(name = "cliente_id")},
                                        inverseJoinColumns = {@JoinColumn(name =
 "pet_id")})

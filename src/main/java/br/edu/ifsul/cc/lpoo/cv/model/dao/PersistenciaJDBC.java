@@ -105,7 +105,7 @@ return esp;
 }
 else if(c==Cliente.class)
 {
-PreparedStatement ps=this.con.prepareStatement("select id, nome from tb_especie where id = ?");
+PreparedStatement ps=this.con.prepareStatement("select * from tb_cliente where cpf = ?");
 ps.setString(1, ((Cliente)id).getCpf());
 ResultSet rs=ps.executeQuery();
 if(rs.next())
@@ -125,6 +125,32 @@ Calendar cd=Calendar.getInstance();
 cd.setTime(dt);
 cl.setData_nascimento(cd);
 return cl;
+}
+}
+else if(c==Funcionario.class)
+{
+PreparedStatement ps=this.con.prepareStatement("select * from tb_funcionario where numero_pis = ?");
+ps.setString(1, ((Funcionario)id).getNumero_pis());
+ResultSet rs=ps.executeQuery();
+if(rs.next())
+{
+Funcionario f=new Funcionario();
+f.setNome(rs.getString("nome"));
+f.setCpf(rs.getString("cpf"));
+f.setRG(rs.getString("rg"));
+f.setEmail(rs.getString("email"));
+f.setSenha(rs.getString("senha"));
+f.setNumero_celular(rs.getString("numero_celular"));
+f.setCep(rs.getString("cep"));
+f.setEndereco(rs.getString("endereco"));
+f.setComplemento(rs.getString("complemento"));
+f.setNumero_ctps(rs.getString("numero_ctps"));
+f.setNumero_pis(rs.getString("numero_pis"));
+java.sql.Date dt=rs.getDate("data_nascimento");
+Calendar cd=Calendar.getInstance();
+cd.setTime(dt);
+f.setData_nascimento(cd);
+return f;
 }
 }
         return null;
@@ -201,6 +227,23 @@ ps.setString(6, c.getNumero_celular());
 ps.setString(7, c.getEndereco());
 ps.setString(8, c.getComplemento());
 ps.setString(9, c.getCep());
+                ps.executeUpdate();
+}
+else if(o==Funcionario.class)
+{
+Funcionario c=(Funcionario)o;
+PreparedStatement ps = this.con.prepareStatement("insert into tb_funcionario(numero_ctps, numero_pis, nome, cpf, rg, senha, email, numero_celular, endereco, cep, complemento) values(?, ?, ?, ?, ?, ?, ?, ?,?)");
+ps.setString(1, c.getNumero_ctps());
+ps.setString(2, c.getNumero_pis());
+                ps.setString(3, c.getNome());
+ps.setString(4, c.getCpf());
+ps.setString(5, c.getRG());
+ps.setString(6, c.getSenha());
+ps.setString(7, c.getEmail());
+ps.setString(8, c.getNumero_celular());
+ps.setString(9, c.getEndereco());
+ps.setString(10, c.getComplemento());
+ps.setString(11, c.getCep());
                 ps.executeUpdate();
 }
 else if(o==Especie.class)
@@ -318,6 +361,29 @@ especies.add(esp);
         }
 return especies;
 }
-
+public Funcionario doLogin(String ctps, String senha) throws Exception
+{
+PreparedStatement ps=this.con.prepareStatement("select * from tb_funcionario where numero_ctps= ? and senha = ?");
+ps.setString(1, ctps);
+ps.setString(2, senha);
+ResultSet rs=ps.executeQuery();
+if(rs.next())
+{
+Funcionario f=new Funcionario();
+f.setNome(rs.getString("nome"));
+f.setCpf(rs.getString("cpf"));
+f.setRG(rs.getString("rg"));
+f.setEmail(rs.getString("email"));
+f.setSenha(rs.getString("senha"));
+f.setNumero_celular(rs.getString("numero_celular"));
+f.setCep(rs.getString("cep"));
+f.setEndereco(rs.getString("endereco"));
+f.setComplemento(rs.getString("complemento"));
+f.setNumero_ctps(rs.getString("numero_ctps"));
+f.setNumero_pis(rs.getString("numero_pis"));
+return f;
+}
+return null;
+}
 
 }
