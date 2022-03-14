@@ -80,6 +80,7 @@ return this.especies;
         pnlCentro = new javax.swing.JPanel();
         lb_name = new javax.swing.JLabel();
         r_name = new javax.swing.JTextField();
+r_name.setToolTipText("Nome");
         setLayout(new java.awt.BorderLayout());
         btnSave.setText("Salvar");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
