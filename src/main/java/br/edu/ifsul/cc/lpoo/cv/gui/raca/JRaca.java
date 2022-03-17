@@ -20,6 +20,7 @@ public class JRaca extends JPanel {
         formulario = new JRacaForm(this, controle);
         this.add(listagem, "tela_raca_listagem");
         this.add(getFormulario(), "tela_raca_formulario");
+showTela("tela_raca_listagem");
     }
     public void showTela(String nomeTela){
         if(nomeTela.equals("tela_raca_listagem")){

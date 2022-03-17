@@ -24,11 +24,15 @@ String nome;
 public Especie()
 {
 }
+@Override
+public String toString()
+{
+return getNome();
+}
 public void setId(Integer id)
 {
 this.id=id;
 }
-
 public Integer getId()
 {
 return this.id;

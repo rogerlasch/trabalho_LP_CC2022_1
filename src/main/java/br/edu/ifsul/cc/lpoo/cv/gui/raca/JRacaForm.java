@@ -32,15 +32,24 @@ private JComboBox cb_especies;
         format = new SimpleDateFormat("dd/MM/yyyy");
     }
     public Raca getRacabyFormulario(){
-         if(r_name.getText().trim().length() > 2)
+         if((r_name.getText().trim().length() >2)&&(cb_especies.getSelectedItem()!=null))
 {
-            Raca r = new Raca();
-            r.setNome(r_name.getText().trim());
-            return r;
+if(raca==null)
+{
+raca=new Raca();
+}
+raca.setNome(r_name.getText().trim());
+raca.setEspecie((Especie)cb_especies.getSelectedItem());
+            return raca;
          }
+else
+{
+                JOptionPane.showMessageDialog(this, "Preencha todos os campos primeiro!", "Info", JOptionPane.INFORMATION_MESSAGE);
+}
          return null;
     }
     public void setRacaFormulario(Raca r){
+raca=null;
 if(r==null)
 {
 r_name.setText("");
@@ -48,6 +57,15 @@ r_name.setText("");
 else
 {
 r_name.setText(r.getNome());
+raca=r;
+for(int i=0; i<cb_especies.getItemCount(); i++)
+{
+if(r.getId()==((Especie)cb_especies.getItemAt(i)).getId())
+{
+cb_especies.setSelectedIndex(i);
+break;
+}
+}
 }
     }
 void setEspecies(List<Especie> especies)
@@ -62,7 +80,7 @@ else
 cb_especies.removeAllItems();
 for(Especie esp : especies)
 {
-cb_especies.addItem(esp.getNome());
+cb_especies.addItem(esp);
 }
 }
 }
@@ -118,7 +136,6 @@ cb_especies=new JComboBox();
         if(r != null){
             try {
                 pnlRaca.getControle().getConexaoJDBC().persist(r);
-                JOptionPane.showMessageDialog(this, r.getNome(), "Salvar", JOptionPane.INFORMATION_MESSAGE);
                 JOptionPane.showMessageDialog(this, "Raca armazenado!", "Salvar", JOptionPane.INFORMATION_MESSAGE);
                 pnlRaca.showTela("tela_raca_listagem");
             } catch (Exception ex) {

@@ -38,6 +38,11 @@ Raca raca;
 public Pet()
 {
 }
+@Override
+public String toString()
+{
+return getId().toString();
+}
 public void setCliente(Cliente c)
 {
 this.cliente=c;

@@ -34,8 +34,8 @@ public class JEspecieList extends javax.swing.JPanel {
         model.setRowCount(0);
         try {
             List<Especie> especies = controle.getConexaoJDBC().listEspecies();
-            for(Especie r : especies){
-                model.addRow(new Object[]{r.getId(), r.getNome()});
+            for(Especie esp : especies){
+                model.addRow(new Object[]{esp});
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Erro ao listar especies :"+ex.getLocalizedMessage(), "especies", JOptionPane.ERROR_MESSAGE);
@@ -83,7 +83,7 @@ tblListagem.setFocusable(true);
             new Object [][] {
             },
             new String [] {
-"Id", "Nome"
+"Nome"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -97,6 +97,7 @@ tblListagem.setFocusable(true);
         pnlCentro.add(scpRolagem, java.awt.BorderLayout.CENTER);
         add(pnlCentro, java.awt.BorderLayout.CENTER);
 populaTable();
+
     }
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {
         pnlEspecie.showTela("tela_especie_formulario");
@@ -119,10 +120,10 @@ populaTable();
             if(indice > -1){
                 DefaultTableModel model =  (DefaultTableModel) tblListagem.getModel();
                 Vector linha = (Vector) model.getDataVector().get(indice);
-                Especie r = (Especie) linha.get(0); 
+                Especie esp = (Especie) linha.get(0);
                 try {
-                    pnlEspecie.getControle().getConexaoJDBC().remover(r);
-                    JOptionPane.showMessageDialog(this, "Especie removido!", "Especie", JOptionPane.INFORMATION_MESSAGE);
+                    pnlEspecie.getControle().getConexaoJDBC().remover(esp);
+                    JOptionPane.showMessageDialog(this, "Especie removida!", "Especie", JOptionPane.INFORMATION_MESSAGE);
                     populaTable();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(this, "Erro ao remover Especie -:"+ex.getLocalizedMessage(), "especies", JOptionPane.ERROR_MESSAGE);

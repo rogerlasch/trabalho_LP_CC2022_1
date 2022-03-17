@@ -1,0 +1,59 @@
+
+
+Descrição do Projeto gráfico;
+
+1) Visão geral:
+
+Este aplicativo permite editar alguns objetos e persisti-los em um banco de
+dados.
+Atualmente com um método de teste, ele adiciona credenciais ao banco de dados
+permitindo a sim fazer um login rudimentar e básico.
+Depois do login feito, é possível editar os seguintes elementos:
+Especie: Que representa a espécie de uma raça, de futuramente, um Pet no banco de dados.
+Raca: Uma raça de alguma espécie de Pet.
+
+2) Telas;
+
+2.1) Login:
+
+Esta tela apresenta 2 campos editáveis e um botão para login.
+O funcionário deve entrar com o número do CTPS e uma senha. E em seguida,
+clicar login para ter acesso ao resto do sistema.
+
+2.2) Tela principal:
+
+Após ao fazer login o usuário é encaminhado para a tela principal do sistema de
+onde ele poderá trabalhar.
+
+As opções podem ser acessadas ao teclar alt e selecionar uma das categorias que
+são:
+Arquivo: contém a opção de fazer logoff, ou sair do aplicativo. Caso Opte pelo
+logoff, o usuário volta para a tela de login que foi preenchida anteriormente.
+
+Cadastro: Aqui é onde o usuário poderá cadastrar, ou editar as entidades cadastradas no banco de dados. Contém os seguintes itens:
+Pet: Futuramente, permitirá cadastrar um Pet ao banco de dados.
+Especie: Permite cadastrar ou editar uma espécie.
+Raca: Permite adicionar ou editar uma raça
+
+2.3) Tela de espécie:
+
+Nesta tela pode-se cadastrar uma nova espécie clicando no botão novo, editar o
+nome clicando no botão editar, ou excluir a mesma do banco de dados clicando no
+botão excluir.
+Também apresenta uma lista de todas espécies atualmente cadastradas no banco de
+dados.
+
+A tela de adicionar ou editar é relativamente simples, basta digitar um novo
+nome no campo de texto apresentado e clicar em salvar para aplicar as mudanças.
+
+2.4) Tela de raça:
+
+Esta tela permite cadastrar uma nova raça ao banco de dados. Na tela principal
+temos uma lista mostrando o ID da raça, o nome da raça e a espécie que a mesma
+pertence. Também existem os botões novo, editar e remover, para manipular a
+lista.
+
+Na tela de edição/criação que pode ser acessada ao clicar em editar ou novo,
+basta digitar o nome da nova raça, ou alterar caso já exista, e na combobox,
+selecionar a qual espécie a nova raça pertence, ou modificar  a raça caso tenha
+sido cadastrada errada uma raça anteriormente.

@@ -37,7 +37,7 @@ public class JRacaList extends javax.swing.JPanel {
         try {
             List<Raca> racas = controle.getConexaoJDBC().listRacas();
             for(Raca r : racas){
-                model.addRow(new Object[]{r, r.getId(), r.getNome()});
+                model.addRow(new Object[]{r, r.getNome(), r.getEspecie()});
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Erro ao listar racas :"+ex.getLocalizedMessage(), "racas", JOptionPane.ERROR_MESSAGE);
@@ -85,7 +85,7 @@ tblListagem.setFocusable(true);
             new Object [][] {
             },
             new String [] {
-"", "Id", "Nome"
+"Id", "Nome", "Especie"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -101,8 +101,16 @@ tblListagem.setFocusable(true);
 populaTable();
     }
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {
-        pnlRaca.showTela("tela_raca_formulario");
+try
+{
+            List<Especie> especies= controle.getConexaoJDBC().listEspecies();
+                pnlRaca.getFormulario().setEspecies(especies);
         pnlRaca.getFormulario().setRacaFormulario(null);
+        pnlRaca.showTela("tela_raca_formulario");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao editar raca:"+ex.getLocalizedMessage(), "racas", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+        }
     }
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {
 try
@@ -112,10 +120,10 @@ try
                 DefaultTableModel model =  (DefaultTableModel) tblListagem.getModel();
                 Vector linha = (Vector) model.getDataVector().get(indice);
                 Raca r = (Raca) linha.get(0);
-                pnlRaca.showTela("tela_raca_formulario");
-                pnlRaca.getFormulario().setRacaFormulario(r);
             List<Especie> especies= controle.getConexaoJDBC().listEspecies();
                 pnlRaca.getFormulario().setEspecies(especies);
+                pnlRaca.getFormulario().setRacaFormulario(r);
+                pnlRaca.showTela("tela_raca_formulario");
             }else{
                   JOptionPane.showMessageDialog(this, "Selecione uma linha para editar!", "Edição", JOptionPane.INFORMATION_MESSAGE);
             }

@@ -30,6 +30,11 @@ Especie especie;
 public Raca()
 {
 }
+@Override
+public String toString()
+{
+return getId().toString();
+}
 public Integer getId()
 {
 return this.id;

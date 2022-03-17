@@ -157,7 +157,7 @@ return f;
     }
     @Override
     public void persist(Object o) throws Exception {
-if(o==Pet.class)
+if(o instanceof Pet)
 {
 Pet p=(Pet)o;
 if(p.getId()==null)
@@ -190,14 +190,14 @@ ps.setInt(4, p.getId());
 ps.executeUpdate();
 }
 }
-else if(o==Raca.class)
+else if(o instanceof Raca)
 {
 Raca ra=(Raca)o;
 if(ra.getId()==null)
 {
 PreparedStatement ps = this.con.prepareStatement("insert into tb_raca"
 + "(id, nome, especie_id) values "
-+"(nextval('seq_raca_id'), ?)", new String[]{"id"});
++"(nextval('seq_raca_id'), ?, ?)", new String[]{"id"});
                 ps.setString(1, ra.getNome());
 ps.setInt(2, ra.getEspecie().getId());
                 ps.executeUpdate();
@@ -208,13 +208,14 @@ ra.setId(rs.getInt(1));
 }
 else
 {
-PreparedStatement ps = this.con.prepareStatement("update tb_raca set nome = ? where id = ?");
+PreparedStatement ps = this.con.prepareStatement("update tb_raca set nome = ?, especie_id = ? where id = ?");
 ps.setString(1, ra.getNome());
-ps.setInt(2, ra.getId());
+ps.setInt(2, ra.getEspecie().getId());
+ps.setInt(3, ra.getId());
 ps.executeUpdate();
 }
 }
-else if(o==Cliente.class)
+else if(o instanceof Cliente)
 {
 Cliente c=(Cliente)o;
 PreparedStatement ps = this.con.prepareStatement("insert into tb_cliente(nome, cpf, rg, senha, email, numero_celular, endereco, cep, complemento) values(?, ?, ?, ?, ?, ?, ?, ?,?)");
@@ -229,7 +230,7 @@ ps.setString(8, c.getComplemento());
 ps.setString(9, c.getCep());
                 ps.executeUpdate();
 }
-else if(o==Funcionario.class)
+else if(o instanceof Funcionario)
 {
 Funcionario c=(Funcionario)o;
 PreparedStatement ps = this.con.prepareStatement("insert into tb_funcionario(numero_ctps, numero_pis, nome, cpf, rg, senha, email, numero_celular, endereco, cep, complemento) values(?, ?, ?, ?, ?, ?, ?, ?,?)");
@@ -246,7 +247,7 @@ ps.setString(10, c.getComplemento());
 ps.setString(11, c.getCep());
                 ps.executeUpdate();
 }
-else if(o==Especie.class)
+else if(o instanceof Especie)
 {
 Especie esp=(Especie)o;
 if(esp.getId()==null)
@@ -274,25 +275,25 @@ ps.executeUpdate();
 
     @Override
     public void remover(Object o) throws Exception {
-if(o==Pet.class)
+if(o instanceof Pet)
 {
 PreparedStatement ps = this.con.prepareStatement("delete from tb_pet where id = ?");
 ps.setInt(1, ((Pet)o).getId());
 ps.execute();
 }
-else if(o==Raca.class)
+else if(o instanceof Raca)
 {
 PreparedStatement ps = this.con.prepareStatement("delete from tb_raca where id = ?");
 ps.setInt(1, ((Raca)o).getId());
 ps.execute();
 }
-else if(o==Especie.class)
+else if(o instanceof Especie)
 {
 PreparedStatement ps = this.con.prepareStatement("delete from tb_especie where id = ?");
 ps.setInt(1, ((Especie)o).getId());
 ps.execute();
 }
-else if(o==Cliente.class)
+else if(o instanceof Cliente)
 {
 PreparedStatement ps = this.con.prepareStatement("delete from tb_clientes where cpf = ?");
 ps.setString(1, ((Cliente)o).getCpf());
@@ -332,16 +333,16 @@ return pets;
 public List<Raca> listRacas() throws Exception
 {
         List<Raca> racas=null;
-PreparedStatement ps = this.con.prepareStatement("select r.nome, r.id, r.especie_id, e.nome from tb_raca as r, tb_especie as e where r.especie_id=e.id;");
+PreparedStatement ps = this.con.prepareStatement("select r.nome as r_name, r.id, r.especie_id, e.nome as esp_name from tb_raca as r, tb_especie as e where r.especie_id=e.id;");
 ResultSet rs = ps.executeQuery();
 racas = new ArrayList();
         while(rs.next()){
             Raca r = new Raca();
 Especie e=new Especie();
-r.setNome(rs.getString("nome"));
+r.setNome(rs.getString("r_name"));
 r.setId(rs.getInt("id"));
 e.setId(rs.getInt("especie_id"));
-e.setNome(rs.getString("nome"));
+e.setNome(rs.getString("esp_name"));
 r.setEspecie(e);
 racas.add(r);
         }

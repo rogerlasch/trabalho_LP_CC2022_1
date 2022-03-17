@@ -20,6 +20,7 @@ public class JEspecie extends JPanel {
         formulario = new JEspecieForm(this, controle);
         this.add(listagem, "tela_especie_listagem");
         this.add(getFormulario(), "tela_especie_formulario");
+showTela("tela_especie_listagem");
     }
     public void showTela(String nomeTela){
         if(nomeTela.equals("tela_especie_listagem")){
